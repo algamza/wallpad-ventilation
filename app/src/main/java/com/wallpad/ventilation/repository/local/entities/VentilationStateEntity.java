@@ -1,0 +1,122 @@
+package com.wallpad.ventilation.repository.local.entities;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
+public class VentilationStateEntity {
+    @PrimaryKey
+    private int id;
+    private int error;
+    private boolean on;
+    private int airVolume;
+    private int mode;
+    private boolean heatOn;
+    private boolean co2Overload;
+    private boolean smokeOn;
+    private boolean filterChangeOn;
+    private boolean heatChangeOn;
+    private boolean fanOverload;
+
+    public VentilationStateEntity(int id, int error, boolean on, int airVolume, int mode, boolean heatOn, boolean co2Overload, boolean smokeOn, boolean filterChangeOn, boolean heatChangeOn, boolean fanOverload) {
+        this.id = id;
+        this.error = error;
+        this.on = on;
+        this.airVolume = airVolume;
+        this.mode = mode;
+        this.heatOn = heatOn;
+        this.co2Overload = co2Overload;
+        this.smokeOn = smokeOn;
+        this.filterChangeOn = filterChangeOn;
+        this.heatChangeOn = heatChangeOn;
+        this.fanOverload = fanOverload;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getError() {
+        return error;
+    }
+
+    public void setError(int error) {
+        this.error = error;
+    }
+
+    public boolean isOn() {
+        return on;
+    }
+
+    public void setOn(boolean on) {
+        this.on = on;
+    }
+
+    public int getAirVolume() {
+        return airVolume;
+    }
+
+    public void setAirVolume(int airVolume) {
+        this.airVolume = airVolume;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public boolean isHeatOn() {
+        return heatOn;
+    }
+
+    public void setHeatOn(boolean heatOn) {
+        this.heatOn = heatOn;
+    }
+
+    public boolean isCo2Overload() {
+        return co2Overload;
+    }
+
+    public void setCo2Overload(boolean co2Overload) {
+        this.co2Overload = co2Overload;
+    }
+
+    public boolean isSmokeOn() {
+        return smokeOn;
+    }
+
+    public void setSmokeOn(boolean smokeOn) {
+        this.smokeOn = smokeOn;
+    }
+
+    public boolean isFilterChangeOn() {
+        return filterChangeOn;
+    }
+
+    public void setFilterChangeOn(boolean filterChangeOn) {
+        this.filterChangeOn = filterChangeOn;
+    }
+
+    public boolean isHeatChangeOn() {
+        return heatChangeOn;
+    }
+
+    public void setHeatChangeOn(boolean heatChangeOn) {
+        this.heatChangeOn = heatChangeOn;
+    }
+
+    public boolean isFanOverload() {
+        return fanOverload;
+    }
+
+    public void setFanOverload(boolean fanOverload) {
+        this.fanOverload = fanOverload;
+    }
+}

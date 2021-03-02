@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    
+    <color name="SatinGray_back">#c1c1c1</color>
+    <color name="SatinBeige_back">#dad3cc</color>
+    <color name="CotaCharcoal_back">#a58c78</color>
+    <color name="CotaCharcoal_back_dim">#66a58c78</color>
+    <color name="GlamNavy_back">#5e697b</color>
+</resources>
