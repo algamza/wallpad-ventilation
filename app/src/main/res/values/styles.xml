@@ -39,7 +39,7 @@
 
     <style name="KDWallPad.Dark.CotaCharcoal"  parent="@style/KDWallPad">
         <item name="android:statusBarColor">@color/CotaCharcoal_back</item>
-        <item name="android:windowBackground">@drawable/bg_idle_cotta_charcoal</item>
+        <item name="android:windowBackground">@color/CotaCharcoal_back</item>
     </style>
 
     <style name="KDWallPad.Dark.GlamNavy"  parent="@style/KDWallPad">
