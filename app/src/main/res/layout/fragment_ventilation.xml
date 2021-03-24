@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="ventilation"
+            type="com.wallpad.ventilation.view.ventilation.VentilationViewModel" />
+        <import type="com.wallpad.ventilation.view.ventilation.VentilationViewModel.Ventilation.MODE"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/light"
+            android:textSize="18sp"
+            android:text="@string/STR_STATE_INFO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="53dp"
+            android:layout_marginEnd="914dp"
+            android:layout_marginBottom="387dp"
+            android:textColor="@color/light_bold"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@{ventilation.ventilation.resIdTextMode}"/>
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="123dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/light"
+            android:alpha="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="61dp"
+            android:layout_marginEnd="802dp"
+            android:layout_marginBottom="387dp"
+            android:textColor="@color/light_bold"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@{ventilation.ventilation.resIdTextVolume}" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="212dp"
+            android:layout_height="212dp"
+            android:layout_marginStart="69dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/wallpad_sub_motion_ventilation_on"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="102dp"
+            android:layout_height="102dp"
+            android:layout_marginStart="124dp"
+            android:layout_marginTop="175dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:goneUnless="@{ventilation.ventilation.on}"
+            app:src="@{ventilation.ventilation.resIdIconMode}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="344dp"
+            android:text="@string/STR_CO2"
+            android:textColor="@color/light"
+            android:textSize="16sp"
+            android:alpha="0.7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="367dp"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@{ventilation.ventilation.resIdTextCo2}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="344dp"
+            android:alpha="0.7"
+            android:text="@string/STR_HEATER"
+            android:textColor="@color/light"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="367dp"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@{ventilation.ventilation.resIdTextHeat}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="265dp"
+            android:layout_marginTop="344dp"
+            android:alpha="0.7"
+            android:text="@string/STR_RUN_SMOKE"
+            android:textColor="@color/light"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="265dp"
+            android:layout_marginTop="367dp"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@{ventilation.ventilation.resIdTextSmoke}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="410dp"
+            android:alpha="0.7"
+            android:text="@string/STR_FILTER"
+            android:textColor="@color/light"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="433dp"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@{ventilation.ventilation.resIdTextFilter}" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="410dp"
+            android:alpha="0.7"
+            android:text="@string/STR_HEAT_CHANGER"
+            android:textColor="@color/light"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="433dp"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@{ventilation.ventilation.resIdTextChanger}" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="265dp"
+            android:layout_marginTop="410dp"
+            android:alpha="0.7"
+            android:text="@string/STR_PAN"
+            android:textColor="@color/light"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="265dp"
+            android:layout_marginTop="433dp"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="@{ventilation.ventilation.resIdTextPan}" />
+
+        <FrameLayout
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="351dp"
+            android:layout_marginEnd="671dp"
+            android:alpha="0.2"
+            android:background="@color/light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="376dp"
+            android:layout_marginTop="44dp"
+            android:alpha="0.4"
+            android:background="@color/light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="390dp"
+            android:layout_marginTop="38dp"
+            android:alpha="0.5"
+            android:text="@string/STR_RUN_MODE"
+            android:textColor="@color/light"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="120dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="366dp"
+            android:layout_marginTop="99dp"
+            android:background="@{ventilation.ventilation.mode==MODE.NORMAL?@color/dark_30:@color/dark_00}"
+            android:onClick="@{()->ventilation.ventilation.callback.onClickMode(ventilation.ventilation.id, MODE.NORMAL)}"
+            android:alpha="@{ventilation.ventilation.on?1.0f:0.2f}"
+            android:clickable="@{ventilation.ventilation.on}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="41dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/btn_ic_o_ventilation_normal_nor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="81dp"
+                android:text="@string/STR_RUN_MODE"
+                android:textColor="@color/light"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="120dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="497dp"
+            android:layout_marginTop="99dp"
+            android:background="@{ventilation.ventilation.mode==MODE.SLEEP?@color/dark_30:@color/dark_00}"
+            android:onClick="@{()->ventilation.ventilation.callback.onClickMode(ventilation.ventilation.id, MODE.SLEEP)}"
+            android:alpha="@{ventilation.ventilation.on?1.0f:0.2f}"
+            android:clickable="@{ventilation.ventilation.on}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="41dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/btn_ic_o_ventilation_sleep_nor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="81dp"
+                android:text="@string/STR_SLEEP_MODE"
+                android:textColor="@color/light"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="120dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="628dp"
+            android:layout_marginTop="99dp"
+            android:background="@{ventilation.ventilation.mode==MODE.HEAT?@color/dark_30:@color/dark_00}"
+            android:onClick="@{()->ventilation.ventilation.callback.onClickMode(ventilation.ventilation.id, MODE.HEAT)}"
+            android:alpha="@{ventilation.ventilation.on?1.0f:0.2f}"
+            android:clickable="@{ventilation.ventilation.on}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="41dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/btn_ic_o_ventilation_battleline_nor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="81dp"
+                android:text="@string/STR_HEAT_MODE"
+                android:textColor="@color/light"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="120dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="759dp"
+            android:layout_marginTop="99dp"
+            android:background="@{ventilation.ventilation.mode==MODE.AUTO?@color/dark_30:@color/dark_00}"
+            android:onClick="@{()->ventilation.ventilation.callback.onClickMode(ventilation.ventilation.id, MODE.AUTO)}"
+            android:alpha="@{ventilation.ventilation.on?1.0f:0.2f}"
+            android:clickable="@{ventilation.ventilation.on}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="41dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/btn_ic_o_ventilation_auto_nor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="81dp"
+                android:text="@string/STR_AUTO_MODE"
+                android:textColor="@color/light"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="120dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="890dp"
+            android:layout_marginTop="99dp"
+            android:background="@{ventilation.ventilation.mode==MODE.SAVE?@color/dark_30:@color/dark_00}"
+            android:onClick="@{()->ventilation.ventilation.callback.onClickMode(ventilation.ventilation.id, MODE.SAVE)}"
+            android:alpha="@{ventilation.ventilation.on?1.0f:0.2f}"
+            android:clickable="@{ventilation.ventilation.on}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="41dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/btn_ic_o_ventilation_saving_nor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="81dp"
+                android:text="@string/STR_SAVE_MODE"
+                android:textColor="@color/light"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="671dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="277dp"
+            android:layout_marginBottom="210dp"
+            android:alpha="0.2"
+            android:background="@color/light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="376dp"
+            android:layout_marginTop="343dp"
+            android:alpha="0.4"
+            android:background="@color/light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="390dp"
+            android:layout_marginTop="337dp"
+            android:alpha="0.5"
+            android:text="@string/STR_VOLUME_STRENGTH"
+            android:textColor="@color/light"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="497dp"
+            android:layout_marginTop="310dp"
+            android:background="@{ventilation.ventilation.volume==1?@color/dark_30:@color/dark_00}"
+            android:gravity="center"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            android:text="@string/STR_STEP_1"
+            android:onClick="@{()->ventilation.ventilation.callback.onClickVolume(ventilation.ventilation.id, 1)}"
+            android:alpha="@{ventilation.ventilation.on?1.0f:0.2f}"
+            android:clickable="@{ventilation.ventilation.on}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="628dp"
+            android:layout_marginTop="310dp"
+            android:background="@{ventilation.ventilation.volume==2?@color/dark_30:@color/dark_00}"
+            android:gravity="center"
+            android:onClick="@{()->ventilation.ventilation.callback.onClickVolume(ventilation.ventilation.id, 2)}"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            android:text="@string/STR_STEP_2"
+            android:alpha="@{ventilation.ventilation.on?1.0f:0.2f}"
+            android:clickable="@{ventilation.ventilation.on}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="759dp"
+            android:layout_marginTop="310dp"
+            android:background="@{ventilation.ventilation.volume==3?@color/dark_30:@color/dark_00}"
+            android:gravity="center"
+            android:onClick="@{()->ventilation.ventilation.callback.onClickVolume(ventilation.ventilation.id, 3)}"
+            android:textColor="@color/light"
+            android:textSize="24sp"
+            android:text="@string/STR_STEP_3"
+            android:alpha="@{ventilation.ventilation.on?1.0f:0.2f}"
+            android:clickable="@{ventilation.ventilation.on}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="671dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="353dp"
+            android:background="@color/dark_40"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="335dp"
+                android:layout_height="match_parent"
+                android:clickable="@{!ventilation.ventilation.on}"
+                android:gravity="center"
+                android:onClick="@{()->ventilation.ventilation.callback.onClickPower(ventilation.ventilation.id, true)}"
+                android:text="@string/STR_POWER_ON"
+                android:textColor="@{ventilation.ventilation.on?@color/light_20:@color/light}"
+                android:textSize="23sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="335dp"
+                android:background="@color/light"
+                android:alpha="0.1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="335dp"
+                android:layout_height="match_parent"
+                android:clickable="@{ventilation.ventilation.on}"
+                android:gravity="center"
+                android:onClick="@{()->ventilation.ventilation.callback.onClickPower(ventilation.ventilation.id, false)}"
+                android:text="@string/STR_POWER_OFF"
+                android:textColor="@{ventilation.ventilation.on?@color/light:@color/light_20}"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

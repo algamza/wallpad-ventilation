@@ -23,31 +23,51 @@
         <item name="colorAccent">#8196ff</item>
     </style>
 
-    <style name="KDWallPad.Dark.CotaCharcoal.Dialog" parent="@style/Theme.AppCompat.Dialog.Alert">
-        <item name="android:statusBarColor">@color/CotaCharcoal_back_dim</item>
+    <style name="KDWallPad.Light.SatinGray"  parent="@style/KDWallPad.Light">
+        <item name="KDBackColor">@color/sg_back</item>
+        <item name="KDIcon">@drawable/app_ic_ventilation_02_satin_gray</item>
+        <item name="android:statusBarColor">@color/sg_back</item>
+        <item name="android:windowBackground">@color/sg_back</item>
     </style>
 
-    <style name="KDWallPad.Light.SatinGray"  parent="@style/KDWallPad">
-        <item name="android:statusBarColor">@color/SatinGray_back</item>
-        <item name="android:windowBackground">@drawable/bg_idle_satin_gray</item>
+    <style name="KDWallPad.Light.SatinBeige"  parent="@style/KDWallPad.Light">
+        <item name="KDBackColor">@color/sb_back</item>
+        <item name="KDIcon">@drawable/app_ic_ventilation_02_satin_beige</item>
+        <item name="android:statusBarColor">@color/sb_back</item>
+        <item name="android:windowBackground">@color/sb_back</item>
     </style>
 
-    <style name="KDWallPad.Light.SatinBeige"  parent="@style/KDWallPad">
-        <item name="android:statusBarColor">@color/SatinBeige_back</item>
-        <item name="android:windowBackground">@drawable/bg_idle_satin_beige</item>
+    <style name="KDWallPad.Dark.CotaCharcoal"  parent="@style/KDWallPad.Dark">
+        <item name="KDBackColor">@color/cc_back</item>
+        <item name="KDIcon">@drawable/app_ic_ventilation_02_cotta_charcoal</item>
+        <item name="android:statusBarColor">@color/cc_back</item>
+        <item name="android:windowBackground">@color/cc_back</item>
     </style>
 
-    <style name="KDWallPad.Dark.CotaCharcoal"  parent="@style/KDWallPad">
-        <item name="android:statusBarColor">@color/CotaCharcoal_back</item>
-        <item name="android:windowBackground">@color/CotaCharcoal_back</item>
+    <style name="KDWallPad.Dark.GlamNavy"  parent="@style/KDWallPad.Dark">
+        <item name="KDBackColor">@color/gn_back</item>
+        <item name="KDIcon">@drawable/app_ic_ventilation_02_glam_navy</item>
+        <item name="android:statusBarColor">@color/gn_back</item>
+        <item name="android:windowBackground">@color/gn_back</item>
     </style>
 
-    <style name="KDWallPad.Dark.GlamNavy"  parent="@style/KDWallPad">
-        <item name="android:statusBarColor">@color/GlamNavy_back</item>
-        <item name="android:windowBackground">@drawable/bg_idle_glam_navy</item>
+    <style name="KDWallPad.Dark" parent="KDWallPad">
+        <item name="KDFontColor">@color/light</item>
+        <item name="KDBackIcon">@drawable/btn_depth_back_dark</item>
+    </style>
+
+    <style name="KDWallPad.Light" parent="KDWallPad">
+        <item name="KDFontColor">@color/dark</item>
+        <item name="KDBackIcon">@drawable/btn_depth_back_light</item>
     </style>
 
     <style name="KDWallPad"  parent="@style/MaterialAnimations">
+        <item name="KDFontColor">@color/light</item>
+        <item name="KDBackColor">@color/cc_back</item>
+        <item name="KDBackIcon">@drawable/btn_ic_card_depth</item>
+        <item name="KDIcon">@drawable/app_ic_ventilation_02_common</item>
+        <item name="android:statusBarColor">@color/cc_back</item>
+        <item name="android:windowBackground">@color/cc_back</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">true</item>
         <item name="android:windowFullscreen">false</item>

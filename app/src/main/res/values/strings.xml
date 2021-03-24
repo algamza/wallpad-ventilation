@@ -1,3 +1,36 @@
 <resources>
-    <string name="app_name">환기</string>
+    <string name="STR_VENTILATION">환기</string>
+    <string name="STR_STATE_INFO">상태정보</string>
+    <string name="STR_NORMAL">일반</string>
+    <string name="STR_SLEEP">취침</string>
+    <string name="STR_HEAT">전열</string>
+    <string name="STR_AUTO">자동</string>
+    <string name="STR_SAVE">절약</string>
+    <string name="STR_NORMAL_MODE">일반모드</string>
+    <string name="STR_SLEEP_MODE">취침모드</string>
+    <string name="STR_HEAT_MODE">전열모드</string>
+    <string name="STR_AUTO_MODE">자동모드</string>
+    <string name="STR_SAVE_MODE">절약모드</string>
+    <string name="STR_MODE">모드</string>
+    <string name="STR_STEP_1">1단계</string>
+    <string name="STR_STEP_2">2단계</string>
+    <string name="STR_STEP_3">3단계</string>
+    <string name="STR_DASH">-</string>
+    <string name="STR_STOP">정지</string>
+    <string name="STR_RUNNING">동작</string>
+    <string name="STR_RUN_NORMAL">정상</string>
+    <string name="STR_OVERLOAD">과열</string>
+    <string name="STR_EXCESSIVE_CONCENTRATION">농도과다</string>
+    <string name="STR_SMOKE_RUN">재연운전</string>
+    <string name="STR_NEED_CHANGE">교체요구</string>
+    <string name="STR_CO2">CO2</string>
+    <string name="STR_HEATER">히터</string>
+    <string name="STR_RUN_SMOKE">제연운전</string>
+    <string name="STR_FILTER">필터</string>
+    <string name="STR_HEAT_CHANGER">전열교환기</string>
+    <string name="STR_PAN">PAN</string>
+    <string name="STR_RUN_MODE">운전모드</string>
+    <string name="STR_VOLUME_STRENGTH">바람세기</string>
+    <string name="STR_POWER_ON">전원 켜기</string>
+    <string name="STR_POWER_OFF">전원 끄기</string>
 </resources>

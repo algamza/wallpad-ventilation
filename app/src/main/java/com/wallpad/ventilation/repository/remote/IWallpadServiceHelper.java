@@ -5,21 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import com.gsmart.IGSmartData;
+import com.wallpad.IWallpadData;
 import com.wallpad.ventilation.repository.common.SerialCmd;
 import com.wallpad.ventilation.repository.local.entities.VentilationStateEntity;
 
 import java.util.List;
 
-public class IGServiceHelper {
+public class IWallpadServiceHelper {
     public interface ICallback {
         void onUpdateVentilationState(VentilationStateEntity state);
     }
 
     private ICallback callback;
-    private IGSmartData igSmartData;
+    private IWallpadData iWallpadData;
 
-    public IGServiceHelper(Context context) {
+    public IWallpadServiceHelper(Context context) {
         context.registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -29,10 +29,8 @@ public class IGServiceHelper {
         }, new IntentFilter(SerialCmd.ACTION_SERIAL_RECEIVE));
     }
 
-    public void setIGService(IGSmartData igSmartData, ICallback callback) {
-        this.igSmartData = igSmartData;
+    public void setIGService(IWallpadData iWallpadData, ICallback callback) {
+        this.iWallpadData = iWallpadData;
         this.callback = callback;
     }
-
-    private void updateBoiler(String[] hex) { }
 }

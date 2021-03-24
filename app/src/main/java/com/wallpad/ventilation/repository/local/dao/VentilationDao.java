@@ -11,13 +11,11 @@ import com.wallpad.ventilation.repository.local.entities.VentilationEntity;
 import com.wallpad.ventilation.repository.local.entities.VentilationPropertyEntity;
 import com.wallpad.ventilation.repository.local.entities.VentilationStateEntity;
 
-import java.util.List;
-
 @Dao
 public interface VentilationDao {
     @Transaction
     @Query("SELECT * FROM VentilationPropertyEntity")
-    LiveData<List<VentilationEntity>> getEntities();
+    LiveData<VentilationEntity> getEntity();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertProperty(VentilationPropertyEntity property);
@@ -26,11 +24,5 @@ public interface VentilationDao {
     void insertState(VentilationStateEntity state);
 
     @Query("DELETE FROM VentilationPropertyEntity")
-    void deleteEntities();
-
-    @Query("DELETE FROM VentilationPropertyEntity WHERE id = :id")
-    void deleteEntity(int id);
-
-    @Query("DELETE FROM VentilationPropertyEntity WHERE id NOT IN (:ids)")
-    void deleteEntities(List<Integer> ids);
+    void deleteEntity();
 }
