@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey;
 @Entity
 public class VentilationStateEntity {
     @PrimaryKey
-    private int id;
+    private int primaryKey;
+    private int groupId;
+    private int channelId;
     private int error;
     private boolean on;
     private int airVolume;
@@ -18,8 +20,10 @@ public class VentilationStateEntity {
     private boolean heatChangeOn;
     private boolean fanOverload;
 
-    public VentilationStateEntity(int id, int error, boolean on, int airVolume, int mode, boolean heatOn, boolean co2Overload, boolean smokeOn, boolean filterChangeOn, boolean heatChangeOn, boolean fanOverload) {
-        this.id = id;
+    public VentilationStateEntity(int primaryKey, int groupId, int channelId, int error, boolean on, int airVolume, int mode, boolean heatOn, boolean co2Overload, boolean smokeOn, boolean filterChangeOn, boolean heatChangeOn, boolean fanOverload) {
+        this.primaryKey = primaryKey;
+        this.groupId = groupId;
+        this.channelId = channelId;
         this.error = error;
         this.on = on;
         this.airVolume = airVolume;
@@ -32,12 +36,28 @@ public class VentilationStateEntity {
         this.fanOverload = fanOverload;
     }
 
-    public int getId() {
-        return id;
+    public int getPrimaryKey() {
+        return primaryKey;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPrimaryKey(int primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(int channelId) {
+        this.channelId = channelId;
     }
 
     public int getError() {

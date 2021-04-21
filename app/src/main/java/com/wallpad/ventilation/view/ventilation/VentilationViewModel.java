@@ -9,6 +9,8 @@ import com.wallpad.ventilation.R;
 import com.wallpad.ventilation.model.VentilationModel;
 import com.wallpad.ventilation.repository.Repository;
 
+import java.util.List;
+
 public class VentilationViewModel extends ViewModel {
     private Repository repository;
     private final LiveData<Ventilation> ventilation;
@@ -16,16 +18,28 @@ public class VentilationViewModel extends ViewModel {
     @ViewModelInject
     public VentilationViewModel(Repository repository) {
         this.repository = repository;
-        ventilation = Transformations.map(repository.getVentilation(), model -> {
-            VentilationModel.State state = model.getState();
-            if ( state == null ) return new Ventilation(callback, model.getId(), model.getAirVolumeRange(), model.isCo2Sensor(), model.isSaveMode(), model.isAutoMode(), model.isHeatMode(), model.isSleepMode(), model.isByPassMode(), false, Ventilation.MODE.AUTO, 0,false, false, false, false, false, false, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            return new Ventilation(callback, model.getId(), model.getAirVolumeRange(), model.isCo2Sensor(),
+        ventilation = Transformations.map(repository.getVentilations(), models -> {
+            if ( models.size() == 0 ) return null;
+            VentilationModel model = models.get(0);
+            List<VentilationModel.State> states = model.getStates();
+            if ( states == null || states.size() == 0 ) {
+                return new Ventilation(callback, model.getId(), 1, model.getAirVolumeRange(),
+                        model.isCo2Sensor(), model.isSaveMode(), model.isAutoMode(), model.isHeatMode(),
+                        model.isSleepMode(), model.isByPassMode(), false, Ventilation.MODE.AUTO,
+                        0,false, false, false, false, false,
+                        false, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0);
+            }
+            VentilationModel.State state = states.get(0);
+            return new Ventilation(callback, model.getId(), state.getId(), model.getAirVolumeRange(), model.isCo2Sensor(),
                     model.isSaveMode(), model.isAutoMode(), model.isHeatMode(), model.isSleepMode(), model.isByPassMode(),
-                    state.isOn(), mapToMode(state.getMode(), state.isOn()), mapToVolume(state.getAirVolume(), state.isOn()), state.isHeatOn(), state.isCo2Overload(), state.isSmokeOn(),
-                    state.isFilterChangeOn(), state.isHeatChangeOn(), state.isFanOverload(), mapToResTextMode(state.getMode(), state.isOn()),
-                    mapToResIconMode(state.getMode()), mapToResTextVolume(state.getAirVolume(), state.isOn()), mapToResTextErrCo2(state.isCo2Overload(), state.isOn()),
+                    state.isOn(), mapToMode(state.getMode(), state.isOn()), mapToVolume(state.getAirVolume(), state.isOn()),
+                    state.isHeatOn(), state.isCo2Overload(), state.isSmokeOn(), state.isFilterChangeOn(), state.isHeatChangeOn(),
+                    state.isFanOverload(), mapToResTextMode(state.getMode(), state.isOn()), mapToResIconMode(state.getMode()),
+                    mapToResTextVolume(state.getAirVolume(), state.isOn()), mapToResTextErrCo2(state.isCo2Overload(), state.isOn()),
                     mapToResTextErrHeat(state.isHeatOn(), state.isOn()), mapToResTextErrSmoke(state.isSmokeOn(), state.isOn()),
-                    mapToResTextErrFilter(state.isFilterChangeOn(), state.isOn()), mapToResTextErrChanger(state.isHeatChangeOn(), state.isOn()), mapToResTextErrPan(state.isFanOverload(), state.isOn()));
+                    mapToResTextErrFilter(state.isFilterChangeOn(), state.isOn()), mapToResTextErrChanger(state.isHeatChangeOn(),
+                    state.isOn()), mapToResTextErrPan(state.isFanOverload(), state.isOn()));
         });
     }
 
@@ -33,16 +47,18 @@ public class VentilationViewModel extends ViewModel {
 
     private final Ventilation.Callback callback = new Ventilation.Callback() {
         @Override
-        public void onClickMode(int id, Ventilation.MODE mode) { repository.requestMode(id, mapToMode(mode)); }
-
-        @Override
-        public void onClickVolume(int id, int volume) {
-            repository.requestVolume(id, volume);
+        public void onClickMode(int groupId, int channelId, Ventilation.MODE mode) {
+            repository.requestControlMode(groupId, channelId, mapToMode(mode));
         }
 
         @Override
-        public void onClickPower(int id, boolean on) {
-            repository.requestPower(id, on);
+        public void onClickVolume(int groupId, int channelId, int volume) {
+            repository.requestControlVolume(groupId, channelId, volume);
+        }
+
+        @Override
+        public void onClickPower(int groupId, int channelId, boolean on) {
+            repository.requestControlPowerOn(groupId, channelId, on);
         }
     };
 
@@ -152,9 +168,9 @@ public class VentilationViewModel extends ViewModel {
 
     public static class Ventilation {
         public interface Callback {
-            void onClickMode(int id, MODE mode);
-            void onClickVolume(int id, int volume);
-            void onClickPower(int id, boolean on);
+            void onClickMode(int groupId, int channelId, MODE mode);
+            void onClickVolume(int groupId, int channelId, int volume);
+            void onClickPower(int groupId, int channelId, boolean on);
         }
         public enum MODE {
             NONE,
@@ -165,7 +181,8 @@ public class VentilationViewModel extends ViewModel {
             SAVE
         }
         private Callback callback;
-        private int id;
+        private int groupId;
+        private int channelId;
         private int volumeRange;
         private boolean supportCo2;
         private boolean supportSave;
@@ -192,9 +209,10 @@ public class VentilationViewModel extends ViewModel {
         private int resIdTextChanger;
         private int resIdTextPan;
 
-        public Ventilation(Callback callback, int id, int volumeRange, boolean supportCo2, boolean supportSave, boolean supportAuto, boolean supportHeat, boolean supportSleep, boolean supportByPass, boolean on, MODE mode, int volume, boolean errHeat, boolean errCo2, boolean errSmoke, boolean errFilter, boolean errChanger, boolean errPan, int resIdTextMode, int resIdIconMode, int resIdTextVolume, int resIdTextCo2, int resIdTextHeat, int resIdTextSmoke, int resIdTextFilter, int resIdTextChanger, int resIdTextPan) {
+        public Ventilation(Callback callback, int groupId, int channelId, int volumeRange, boolean supportCo2, boolean supportSave, boolean supportAuto, boolean supportHeat, boolean supportSleep, boolean supportByPass, boolean on, MODE mode, int volume, boolean errHeat, boolean errCo2, boolean errSmoke, boolean errFilter, boolean errChanger, boolean errPan, int resIdTextMode, int resIdIconMode, int resIdTextVolume, int resIdTextCo2, int resIdTextHeat, int resIdTextSmoke, int resIdTextFilter, int resIdTextChanger, int resIdTextPan) {
             this.callback = callback;
-            this.id = id;
+            this.groupId = groupId;
+            this.channelId = channelId;
             this.volumeRange = volumeRange;
             this.supportCo2 = supportCo2;
             this.supportSave = supportSave;
@@ -230,12 +248,20 @@ public class VentilationViewModel extends ViewModel {
             this.callback = callback;
         }
 
-        public int getId() {
-            return id;
+        public int getGroupId() {
+            return groupId;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setGroupId(int groupId) {
+            this.groupId = groupId;
+        }
+
+        public int getChannelId() {
+            return channelId;
+        }
+
+        public void setChannelId(int channelId) {
+            this.channelId = channelId;
         }
 
         public int getVolumeRange() {

@@ -11,9 +11,9 @@ public class VentilationModel {
     private boolean heatMode;
     private boolean sleepMode;
     private boolean byPassMode;
-    private State state;
+    private List<State> states;
 
-    public VentilationModel(int id, int airVolumeRange, boolean co2Sensor, boolean saveMode, boolean autoMode, boolean heatMode, boolean sleepMode, boolean byPassMode, State state) {
+    public VentilationModel(int id, int airVolumeRange, boolean co2Sensor, boolean saveMode, boolean autoMode, boolean heatMode, boolean sleepMode, boolean byPassMode, List<State> states) {
         this.id = id;
         this.airVolumeRange = airVolumeRange;
         this.co2Sensor = co2Sensor;
@@ -22,7 +22,7 @@ public class VentilationModel {
         this.heatMode = heatMode;
         this.sleepMode = sleepMode;
         this.byPassMode = byPassMode;
-        this.state = state;
+        this.states = states;
     }
 
     public int getId() {
@@ -89,12 +89,12 @@ public class VentilationModel {
         this.byPassMode = byPassMode;
     }
 
-    public State getState() {
-        return state;
+    public List<State> getStates() {
+        return states;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setStates(List<State> states) {
+        this.states = states;
     }
 
     public static class State {

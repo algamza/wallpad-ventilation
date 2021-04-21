@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.wallpad.ventilation.repository.Repository;
 import com.wallpad.ventilation.repository.local.dao.VentilationDao;
+import com.wallpad.ventilation.repository.remote.ContentProviderHelper;
 import com.wallpad.ventilation.repository.remote.IWallpadServiceHelper;
 import com.wallpad.ventilation.repository.remote.TestHelper;
 
@@ -21,6 +22,12 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
+    public ContentProviderHelper provideContentProviderHelper(@ApplicationContext Context context) {
+        return new ContentProviderHelper(context);
+    }
+
+    @Provides
+    @Singleton
     public IWallpadServiceHelper provideAidlHelper(@ApplicationContext Context context) {
         return new IWallpadServiceHelper(context);
     }
@@ -29,13 +36,15 @@ public class RepositoryModule {
     @Singleton
     public Repository provideRepository(
             TestHelper testHelper,
-            IWallpadServiceHelper IWallpadServiceHelper,
-            VentilationDao ventilationDao
-            ) {
+            ContentProviderHelper contentProviderHelper,
+            IWallpadServiceHelper iWallpadServiceHelper,
+            VentilationDao dao
+    ) {
         return new Repository(
                 testHelper,
-                IWallpadServiceHelper,
-                ventilationDao
+                contentProviderHelper,
+                iWallpadServiceHelper,
+                dao
         );
     }
 }

@@ -6,8 +6,8 @@ import androidx.room.Relation;
 public class VentilationEntity {
     @Embedded private VentilationPropertyEntity property;
     @Relation(
-            parentColumn = "id",
-            entityColumn = "id",
+            parentColumn = "primaryKey",
+            entityColumn = "primaryKey",
             entity = VentilationStateEntity.class
     )
     private VentilationStateEntity state;

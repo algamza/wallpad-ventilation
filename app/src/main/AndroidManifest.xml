@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.wallpad.ventilation">
 
-    <uses-permission android:name="com.gsmart.permission.HA_RESPONSE" />
+    <uses-permission android:name="com.wallpad.permission.deviceStatus" />
 
     <application
         android:allowBackup="true"

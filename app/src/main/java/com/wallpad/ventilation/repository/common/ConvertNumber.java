@@ -1,9 +1,5 @@
 package com.wallpad.ventilation.repository.common;
 
-
-/**
- * Convert number
- */
 public class ConvertNumber {
     private static final int numberOfBitsInAHalfByte = 4;
     private static final int halfByte = 0x0F;
@@ -21,7 +17,7 @@ public class ConvertNumber {
      * @param sizeOfIntInHalfBytes size of int in half bytes
      * @return hex string
      */
-    public static String decToHex(int dec, int sizeOfIntInHalfBytes) {
+    static String decToHex(int dec, int sizeOfIntInHalfBytes) {
         StringBuilder hexBuilder = new StringBuilder(sizeOfIntInHalfBytes);
         hexBuilder.setLength(sizeOfIntInHalfBytes);
         for (int i = sizeOfIntInHalfBytes - 1; i >= 0; --i) {
@@ -47,10 +43,5 @@ public class ConvertNumber {
             val = 16 * val + d;
         }
         return val;
-    }
-
-    public static boolean checkBitOn(int val, int index) {
-        int mask = 1 << index;
-        return (val & mask) != 0;
     }
 }

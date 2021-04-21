@@ -8,7 +8,9 @@ import com.wallpad.ventilation.model.VentilationModel;
 import com.wallpad.ventilation.repository.common.Mapper;
 import com.wallpad.ventilation.repository.local.dao.VentilationDao;
 import com.wallpad.ventilation.repository.local.entities.VentilationEntity;
+import com.wallpad.ventilation.repository.local.entities.VentilationPropertyEntity;
 import com.wallpad.ventilation.repository.local.entities.VentilationStateEntity;
+import com.wallpad.ventilation.repository.remote.ContentProviderHelper;
 import com.wallpad.ventilation.repository.remote.IWallpadServiceHelper;
 import com.wallpad.ventilation.repository.remote.TestHelper;
 
@@ -23,60 +25,70 @@ import javax.inject.Singleton;
 @Singleton
 public class Repository {
     private final ExecutorService executorService = Executors.newFixedThreadPool(6);
-    private final IWallpadServiceHelper IWallpadServiceHelper;
+    private final IWallpadServiceHelper iWallpadServiceHelper;
+    private final ContentProviderHelper contentProviderHelper;
     private final TestHelper testHelper;
 
     private final VentilationDao ventilationDao;
-    private final LiveData<VentilationModel> ventilation;
+    private final LiveData<List<VentilationModel>> models;
 
     @Inject public Repository( TestHelper testHelper,
-        IWallpadServiceHelper IWallpadServiceHelper,
-        VentilationDao ventilationDao
+                               ContentProviderHelper contentProviderHelper,
+                               IWallpadServiceHelper iWallpadServiceHelper,
+                               VentilationDao ventilationDao
     ) {
         this.testHelper = testHelper;
-        this.IWallpadServiceHelper = IWallpadServiceHelper;
+        this.iWallpadServiceHelper = iWallpadServiceHelper;
+        this.contentProviderHelper = contentProviderHelper;
         this.ventilationDao = ventilationDao;
 
-        ventilation = Transformations.map(ventilationDao.getEntity(), Mapper::mapToVentilationModel);
-    }
-
-    public  LiveData<VentilationModel> getVentilation() {
-        executorService.execute(()->setVentilation(testHelper.getVentilation()));
-        return ventilation;
-    }
-
-    private void setVentilation(VentilationModel model) {
-        executorService.execute(() -> {
-            if ( model == null ) return;
-            VentilationEntity entity = Mapper.mapToVentilationEntity(model);
-            ventilationDao.insertProperty(entity.getProperty());
-            ventilationDao.insertState(entity.getState());
-        });
+        models = Transformations.map(ventilationDao.getEntities(), Mapper::mapToVentilationModels);
     }
 
     public void injectIWallpadService(IWallpadData iWallpadData) {
-        IWallpadServiceHelper.setIGService(iWallpadData, iCallback);
+        iWallpadServiceHelper.setIGService(iWallpadData, serviceCallback);
+        contentProviderHelper.setCallback(providerCallback);
+        contentProviderHelper.requestProperties();
     }
 
-    public void requestMode(int id, VentilationModel.State.MODE mode) {
-        testHelper.requestMode(id, mode);
-        setVentilation(testHelper.getVentilation());
+    public LiveData<List<VentilationModel>> getVentilations() {
+        executorService.execute(contentProviderHelper::requestProperties);
+        return models;
     }
 
-    public void requestVolume(int id, int volume) {
-        testHelper.requestVolume(id, volume);
-        setVentilation(testHelper.getVentilation());
+    public void requestControlPowerOn(int group, int sub, boolean on) {
+        iWallpadServiceHelper.requestPowerOn(group, sub, on);
     }
 
-    public void requestPower(int id, boolean on) {
-        testHelper.requestPowerOn(id, on);
-        setVentilation(testHelper.getVentilation());
+    public void requestControlVolume(int group, int sub, int volume) {
+        iWallpadServiceHelper.requestVolume(group, sub, volume);
     }
 
-    private final IWallpadServiceHelper.ICallback iCallback = new IWallpadServiceHelper.ICallback() {
+    public void requestControlMode(int group, int sub, VentilationModel.State.MODE mode) {
+        iWallpadServiceHelper.requestMode(group, sub, Mapper.mapToMode(mode));
+    }
+
+    private final IWallpadServiceHelper.ICallback serviceCallback = new IWallpadServiceHelper.ICallback() {
         @Override
-        public void onUpdateVentilationState(VentilationStateEntity state) {
+        public void onUpdateStates(List<VentilationStateEntity> states) {
+            executorService.execute(() -> ventilationDao.insertStates(states));
+        }
+    };
 
+    private final ContentProviderHelper.ICallback providerCallback = new ContentProviderHelper.ICallback() {
+        @Override
+        public void onUpdateProperties(List<VentilationPropertyEntity> properties) {
+            executorService.execute(()->{
+                ventilationDao.deleteNotInEntities(Mapper.getKeys(properties));
+                ventilationDao.insertProperties(properties);
+                int groupId = 0;
+                for ( VentilationPropertyEntity property : properties ) {
+                    if ( groupId != property.getGroupId() ) {
+                        groupId = property.getGroupId();
+                        iWallpadServiceHelper.requestStates(groupId);
+                    }
+                }
+            });
         }
     };
 }

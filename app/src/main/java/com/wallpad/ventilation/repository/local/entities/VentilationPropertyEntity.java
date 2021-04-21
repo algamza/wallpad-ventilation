@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey;
 @Entity
 public class VentilationPropertyEntity {
     @PrimaryKey
-    private int id;
+    private int primaryKey;
+    private int groupId;
+    private int channelId;
     private int airVolumeRange;
     private boolean co2Sensor;
     private boolean saveMode;
@@ -15,8 +17,10 @@ public class VentilationPropertyEntity {
     private boolean sleepMode;
     private boolean byPassMode;
 
-    public VentilationPropertyEntity(int id, int airVolumeRange, boolean co2Sensor, boolean saveMode, boolean autoMode, boolean heatMode, boolean sleepMode, boolean byPassMode) {
-        this.id = id;
+    public VentilationPropertyEntity(int primaryKey, int groupId, int channelId, int airVolumeRange, boolean co2Sensor, boolean saveMode, boolean autoMode, boolean heatMode, boolean sleepMode, boolean byPassMode) {
+        this.primaryKey = primaryKey;
+        this.groupId = groupId;
+        this.channelId = channelId;
         this.airVolumeRange = airVolumeRange;
         this.co2Sensor = co2Sensor;
         this.saveMode = saveMode;
@@ -26,12 +30,28 @@ public class VentilationPropertyEntity {
         this.byPassMode = byPassMode;
     }
 
-    public int getId() {
-        return id;
+    public int getPrimaryKey() {
+        return primaryKey;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPrimaryKey(int primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(int channelId) {
+        this.channelId = channelId;
     }
 
     public int getAirVolumeRange() {
